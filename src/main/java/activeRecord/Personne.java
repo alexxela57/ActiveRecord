@@ -25,6 +25,15 @@ public class Personne {
         return prenom;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    /**
+     *
+     * @return
+     * @throws SQLException
+     */
     public static ArrayList<Personne> findAll() throws SQLException {
         Connection connect = DBConnection.getConnection();
         System.out.println("4) Recupere les personnes de la table Personne");
@@ -47,6 +56,12 @@ public class Personne {
         return list;
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     * @throws SQLException
+     */
     public static Personne findById(int id) throws SQLException {
         Connection connect = DBConnection.getConnection();
         Personne personne = null;
@@ -64,6 +79,12 @@ public class Personne {
         return personne;
     }
 
+    /**
+     *
+     * @param nom
+     * @return
+     * @throws SQLException
+     */
     public static ArrayList<Personne> findByName(String nom) throws SQLException {
         Connection connect = DBConnection.getConnection();
         ArrayList<Personne> personnes = new ArrayList<>();
@@ -82,6 +103,10 @@ public class Personne {
         return personnes;
     }
 
+    /**
+     *
+     * @throws SQLException
+     */
     public static void createTable() throws SQLException {
         Connection connect = DBConnection.getConnection();
         String createString = "CREATE TABLE Personne ( " + "ID INTEGER  AUTO_INCREMENT, "
@@ -91,6 +116,10 @@ public class Personne {
         System.out.println("1) creation table Personne\n");
     }
 
+    /**
+     *
+     * @throws SQLException
+     */
     public static void deleteTable() throws SQLException {
         Connection connect = DBConnection.getConnection();
         String drop = "DROP TABLE Personne";
@@ -99,11 +128,19 @@ public class Personne {
         System.out.println("9) Supprime table Personne");
     }
 
+    /**
+     *
+     * @throws SQLException
+     */
     public void save() throws SQLException {
         if(id > -1) update(); //la personne existe dans la table donc update
         else saveNew(); //la personne n'est pas dans la table , on l'insère
     }
 
+    /**
+     *
+     * @throws SQLException
+     */
     private void saveNew() throws SQLException {
         Connection connect = DBConnection.getConnection();
         String SQLPrep = "INSERT INTO Personne (nom, prenom) VALUES (?,?);";
@@ -123,6 +160,10 @@ public class Personne {
         this.id = autoInc;
     }
 
+    /**
+     *
+     * @throws SQLException
+     */
     private void update() throws SQLException {
         Connection connect = DBConnection.getConnection();
         String SQLprep = "update Personne set nom=?, prenom=? where id=?;";
@@ -135,6 +176,10 @@ public class Personne {
         //System.out.println();
     }
 
+    /**
+     *
+     * @throws SQLException
+     */
     public void delete() throws SQLException {
         Connection connect = DBConnection.getConnection();
         String SQLprep = "DELETE FROM <link>Personne</link> WHERE id = ?";
@@ -144,4 +189,6 @@ public class Personne {
         System.out.println("Personne supprimée avec succès");
         id = -1; // Réinitialisation de l'ID de la personne à -1
     }
+
+
 }
