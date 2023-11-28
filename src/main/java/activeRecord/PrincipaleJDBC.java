@@ -1,10 +1,7 @@
 package activeRecord;
 
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class PrincipaleJDBC {
 
@@ -12,7 +9,7 @@ public class PrincipaleJDBC {
 
     public static void main(String[] args) throws SQLException {
 
-        DBConnection connect;
+        Connection connect = DBConnection.getConnection();
 
         // creation de la table Personne
         {
