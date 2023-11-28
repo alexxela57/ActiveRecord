@@ -1,9 +1,6 @@
 package activeRecord;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -88,5 +85,22 @@ public class Personne {
 
         connect.close();
         return personnes;
+    }
+
+    public static void createTable() throws SQLException {
+        Connection connect = DBConnection.getConnection();
+        String createString = "CREATE TABLE Personne ( " + "ID INTEGER  AUTO_INCREMENT, "
+                + "NOM varchar(40) NOT NULL, " + "PRENOM varchar(40) NOT NULL, " + "PRIMARY KEY (ID))";
+        Statement stmt = connect.createStatement();
+        stmt.executeUpdate(createString);
+        System.out.println("1) creation table Personne\n");
+    }
+
+    public static void deleteTable() throws SQLException {
+        Connection connect = DBConnection.getConnection();
+        String drop = "DROP TABLE Personne";
+        Statement stmt = connect.createStatement();
+        stmt.executeUpdate(drop);
+        System.out.println("9) Supprime table Personne");
     }
 }

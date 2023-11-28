@@ -11,15 +11,6 @@ public class PrincipaleJDBC {
 
         Connection connect = DBConnection.getConnection();
 
-        // creation de la table Personne
-        {
-            String createString = "CREATE TABLE Personne ( " + "ID INTEGER  AUTO_INCREMENT, "
-                    + "NOM varchar(40) NOT NULL, " + "PRENOM varchar(40) NOT NULL, " + "PRIMARY KEY (ID))";
-            Statement stmt = connect.createStatement();
-            stmt.executeUpdate(createString);
-            System.out.println("1) creation table Personne\n");
-        }
-
         // ajout de personne avec requete preparee
         {
             String SQLPrep = "INSERT INTO Personne (nom, prenom) VALUES (?,?);";
@@ -126,14 +117,6 @@ public class PrincipaleJDBC {
                 System.out.println("  -> (" + id + ") " + nom + ", " + prenom);
             }
             System.out.println();
-        }
-
-        // suppression de la table personne
-        {
-            String drop = "DROP TABLE Personne";
-            Statement stmt = connect.createStatement();
-            stmt.executeUpdate(drop);
-            System.out.println("9) Supprime table Personne");
         }
 
     }
