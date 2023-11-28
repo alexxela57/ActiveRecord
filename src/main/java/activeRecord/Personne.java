@@ -25,7 +25,7 @@ public class Personne {
         return prenom;
     }
 
-    public static List<Personne> findAll() throws SQLException {
+    public static ArrayList<Personne> findAll() throws SQLException {
         Connection connect = DBConnection.getConnection();
         System.out.println("4) Recupere les personnes de la table Personne");
         String SQLPrep = "SELECT * FROM Personne;";
@@ -34,7 +34,7 @@ public class Personne {
         prep1.execute();
         ResultSet rs = prep1.getResultSet();
         // s'il y a un resultat
-        List<Personne> list = new ArrayList<Personne>();
+        ArrayList<Personne> list = new ArrayList<Personne>();
         while (rs.next()) {
             String nom = rs.getString("nom");
             String prenom = rs.getString("prenom");
@@ -64,9 +64,9 @@ public class Personne {
         return personne;
     }
 
-    public static List<Personne> findByName(String nom) throws SQLException {
+    public static ArrayList<Personne> findByName(String nom) throws SQLException {
         Connection connect = DBConnection.getConnection();
-        List<Personne> personnes = new ArrayList<>();
+        ArrayList<Personne> personnes = new ArrayList<>();
 
         String SQLPrep = "SELECT * FROM Personne WHERE NOM = ?";
         PreparedStatement prep = connect.prepareStatement(SQLPrep);

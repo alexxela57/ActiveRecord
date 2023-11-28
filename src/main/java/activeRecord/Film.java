@@ -71,4 +71,29 @@ public class Film {
         //System.out.println("7) Effectue modification Personne id 2");
         //System.out.println();
     }
+
+    public static Film findById(int id) throws SQLException {
+        Connection connect = DBConnection.getConnection();
+        Film film = null;
+
+        String SQLPrep = "SELECT * FROM Film WHERE ID = ?";
+        PreparedStatement prep = connect.prepareStatement(SQLPrep);
+        prep.setInt(1, id);
+        ResultSet rs = prep.executeQuery();
+
+        if (rs.next()) {
+            String titre = rs.getString("TITRE");
+            int id_rea = rs.getInt("ID_REA");
+            film = new Film(titre, id_rea);
+        }
+        return film;
+    }
+
+    public String getTitre() {
+        return titre;
+    }
+
+    public int getId_real() {
+        return id_real;
+    }
 }
