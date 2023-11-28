@@ -134,4 +134,14 @@ public class Personne {
         //System.out.println("7) Effectue modification Personne id 2");
         //System.out.println();
     }
+
+    public void delete() throws SQLException {
+        Connection connect = DBConnection.getConnection();
+        String SQLprep = "DELETE FROM <link>Personne</link> WHERE id = ?";
+        PreparedStatement prep = connect.prepareStatement(SQLprep);
+        prep.setInt(1, id);
+        prep.executeUpdate();
+        System.out.println("Personne supprimée avec succès");
+        id = -1; // Réinitialisation de l'ID de la personne à -1
+    }
 }
