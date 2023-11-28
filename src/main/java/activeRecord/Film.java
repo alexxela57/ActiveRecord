@@ -162,7 +162,7 @@ public class Film {
         ArrayList<Film> films = new ArrayList<>();
         int id=p.getId();
 
-        String SQLPrep = "SELECT * FROM Film WHERE ID_REA = id";
+        String SQLPrep = "SELECT * FROM Film WHERE ID_REA = ?";
         PreparedStatement prep = connect.prepareStatement(SQLPrep);
         prep.setInt(1, id);
         ResultSet rs = prep.executeQuery();
@@ -175,4 +175,11 @@ public class Film {
         return films;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setTitre(String titre) {
+        this.titre = titre;
+    }
 }

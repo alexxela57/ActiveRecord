@@ -190,5 +190,11 @@ public class Personne {
         id = -1; // Réinitialisation de l'ID de la personne à -1
     }
 
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
 
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
 }
