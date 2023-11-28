@@ -13,6 +13,12 @@ public class Film {
         this.id_real = id_real;
     }
 
+    private Film(String titre, int id, int id_real){
+        this.titre = titre;
+        this.id = id;
+        this.id_real = id_real;
+    }
+
     public static void createTable() throws SQLException {
         Connection connect = DBConnection.getConnection();
         String createString = "CREATE TABLE Film ( " + "ID INTEGER  AUTO_INCREMENT, "
@@ -40,7 +46,7 @@ public class Film {
         String SQLPrep = "INSERT INTO Film (titre, id_real) VALUES (?,?);";
         PreparedStatement prep = connect.prepareStatement(SQLPrep, Statement.RETURN_GENERATED_KEYS);
         prep.setString(1, titre);
-        prep.setString(2, id_real);
+        prep.setInt(2, id_real);
         prep.executeUpdate();
         //System.out.println("3) ajout Ridley Scott");
 
@@ -56,10 +62,10 @@ public class Film {
 
     private void update() throws SQLException {
         Connection connect = DBConnection.getConnection();
-        String SQLprep = "update Personne set nom=?, prenom=? where id=?;";
+        String SQLprep = "update Film set titre=?, id_real=? where id=?;";
         PreparedStatement prep = connect.prepareStatement(SQLprep);
-        prep.setString(1, nom);
-        prep.setString(2, prenom);
+        prep.setString(1, titre);
+        prep.setInt(2, id_real);
         prep.setInt(3, id);
         prep.execute();
         //System.out.println("7) Effectue modification Personne id 2");
