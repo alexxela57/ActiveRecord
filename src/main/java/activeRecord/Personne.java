@@ -100,8 +100,8 @@ public class Personne {
     }
 
     public void save() throws SQLException {
-        if(id > -1) update();
-        else saveNew();
+        if(id > -1) update(); //la personne existe dans la table donc update
+        else saveNew(); //la personne n'est pas dans la table , on l'insère
     }
 
     private void saveNew() throws SQLException {

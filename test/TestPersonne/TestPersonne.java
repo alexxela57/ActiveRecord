@@ -56,4 +56,9 @@ public class TestPersonne {
         List<Personne> personnes = Personne.findByName("Smith");
         assertEquals(0, personnes.size());
     }
+
+    @Test
+    public void testDelete()throws SQLException{
+
+    }
 }
