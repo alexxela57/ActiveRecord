@@ -12,18 +12,20 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class TestPersonne {
     @BeforeEach
-    void setUp(){
-
+    void setUp() throws SQLException {
+        Personne.createTable();
+        (new Personne("TOTO","toto")).save();
+        (new Personne("TATA","tata")).save();
     }
 
     @AfterEach
-    void end(){
-
+    void end() throws SQLException {
+        Personne.deleteTable();
     }
     @Test
     public void testFindAll() throws SQLException {
         List<Personne> personnes = Personne.findAll();
-        assertEquals(2, personnes.size());
+        assertEquals(2, personnes.size(),"il devrait y avoir 2 personnes");
     }
 
     @Test

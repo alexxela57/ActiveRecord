@@ -44,7 +44,6 @@ public class Personne {
             personne.id = id;
             list.add(personne);
         }
-        connect.close();
         return list;
     }
 
@@ -62,8 +61,6 @@ public class Personne {
             String prenom = rs.getString("PRENOM");
             personne = new Personne(nom, prenom);
         }
-
-        connect.close();
         return personne;
     }
 
@@ -82,8 +79,6 @@ public class Personne {
             Personne personne = new Personne( nom, prenom);
             personnes.add(personne);
         }
-
-        connect.close();
         return personnes;
     }
 
@@ -109,7 +104,7 @@ public class Personne {
         else saveNew();
     }
 
-    public void saveNew() throws SQLException {
+    private void saveNew() throws SQLException {
         Connection connect = DBConnection.getConnection();
         String SQLPrep = "INSERT INTO Personne (nom, prenom) VALUES (?,?);";
         PreparedStatement prep = connect.prepareStatement(SQLPrep, Statement.RETURN_GENERATED_KEYS);
@@ -128,7 +123,7 @@ public class Personne {
         this.id = autoInc;
     }
 
-    public void update() throws SQLException {
+    private void update() throws SQLException {
         Connection connect = DBConnection.getConnection();
         String SQLprep = "update Personne set nom=?, prenom=? where id=?;";
         PreparedStatement prep = connect.prepareStatement(SQLprep);
