@@ -103,4 +103,40 @@ public class Personne {
         stmt.executeUpdate(drop);
         System.out.println("9) Supprime table Personne");
     }
+
+    public void save() throws SQLException {
+        if(id > -1) update();
+        else saveNew();
+    }
+
+    public void saveNew() throws SQLException {
+        Connection connect = DBConnection.getConnection();
+        String SQLPrep = "INSERT INTO Personne (nom, prenom) VALUES (?,?);";
+        PreparedStatement prep = connect.prepareStatement(SQLPrep, Statement.RETURN_GENERATED_KEYS);
+        prep.setString(1, nom);
+        prep.setString(2, prenom);
+        prep.executeUpdate();
+        //System.out.println("3) ajout Ridley Scott");
+
+        // recuperation de la derniere ligne ajoutee (auto increment)
+        // recupere le nouvel id
+        int autoInc = -1;
+        ResultSet rs = prep.getGeneratedKeys();
+        if (rs.next()) {
+            autoInc = rs.getInt(1);
+        }
+        this.id = autoInc;
+    }
+
+    public void update() throws SQLException {
+        Connection connect = DBConnection.getConnection();
+        String SQLprep = "update Personne set nom=?, prenom=? where id=?;";
+        PreparedStatement prep = connect.prepareStatement(SQLprep);
+        prep.setString(1, nom);
+        prep.setString(2, prenom);
+        prep.setInt(3, id);
+        prep.execute();
+        //System.out.println("7) Effectue modification Personne id 2");
+        //System.out.println();
+    }
 }
