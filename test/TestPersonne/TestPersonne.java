@@ -1,6 +1,8 @@
 package TestPersonne;
 
 import activeRecord.Personne;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
@@ -9,6 +11,15 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TestPersonne {
+    @BeforeEach
+    void setUp(){
+
+    }
+
+    @AfterEach
+    void end(){
+
+    }
     @Test
     public void testFindAll() throws SQLException {
         List<Personne> personnes = Personne.findAll();
@@ -25,7 +36,7 @@ public class TestPersonne {
 
     @Test
     public void testFindByIdNonExistingPersonne() throws SQLException {
-        Personne personne = Personne</link>.findById(100);
+        Personne personne = Personne.findById(100);
         assertNull(personne);
     }
 
